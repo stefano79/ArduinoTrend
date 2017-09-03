@@ -638,7 +638,7 @@ public class View extends JFrame {
 			labelValue.setText(value);
 
 			if (isSelected) {
-				setBackground(Color.gray);
+				setBackground(Color.getHSBColor((float) 0.6, (float) 0.6, (float) 1));
 			} else {
 				setBackground(jlist.getBackground());
 			}
