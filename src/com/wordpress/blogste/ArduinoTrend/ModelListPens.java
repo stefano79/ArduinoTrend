@@ -7,6 +7,7 @@ import javax.swing.AbstractListModel;
 
 import com.wordpress.blogste.trend.Pen;
 
+@SuppressWarnings("rawtypes")
 public class ModelListPens extends AbstractListModel implements Observer {
 
 	private static final long serialVersionUID = 1L;

@@ -27,7 +27,6 @@ import com.wordpress.blogste.Protocollo_Seriale_Ardunio.Protocollo;
 import com.wordpress.blogste.SerialCom.Serial;
 import com.wordpress.blogste.trend.Pen;
 import com.wordpress.blogste.trend.PenModel;
-import com.wordpress.blogste.trend.Trend;
 import com.wordpress.blogste.trend.TrendModel;
 import com.wordpress.blogste.trend.tools.ViewDialogPen;
 import com.wordpress.blogste.trend.tools.ViewDialogPreference;
@@ -45,6 +44,7 @@ public class Controller implements Observer {
 	private boolean fileEdited = false;
 	private File file;
 
+	@SuppressWarnings("unchecked")
 	public Controller(final View view) {
 		this.view = view;
 
@@ -663,7 +663,6 @@ public class Controller implements Observer {
 
 	private class ListenerSettingsTrend implements ActionListener {
 
-		@SuppressWarnings("unused")
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			final ViewDialogPreference dialog = new ViewDialogPreference(view,
@@ -788,34 +787,4 @@ public class Controller implements Observer {
 
 	}
 
-	/*
-	 * *********** FileFilter estensioni dei file *************
-	 */
-
-	private class GenericFileFilter extends FileFilter {
-
-		private String extension;
-		private String description;
-
-		public GenericFileFilter(String extension, String description) {
-			super();
-			this.extension = extension;
-			this.description = description;
-		}
-
-		public boolean accept(File file) {
-			if (file.isDirectory())
-				return true;
-			String fname = file.getName().toLowerCase();
-			return fname.endsWith(extension);
-		}
-
-		public String getExtension() {
-			return extension;
-		}
-
-		public String getDescription() {
-			return description;
-		}
-	}
 }

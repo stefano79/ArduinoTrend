@@ -89,7 +89,7 @@ public class View extends JFrame {
 	private JMenu mnHelp;
 	private JMenuItem mntmInfo;
 	private JPanel panelSouth;
-	private JList listPens;
+	private JList<ModelListPens> listPens;
 	private JMenuItem mntmEdit;
 	private JMenuItem mntmRemove;
 	private JPopupMenu popupMenuListPens;
@@ -226,7 +226,7 @@ public class View extends JFrame {
 					btnAddPen.setBorder(new EmptyBorder(0, 0, 0, 5));
 					btnAddPen.setHorizontalAlignment(SwingConstants.RIGHT);
 
-		listPens = new JList();
+		listPens = new JList<ModelListPens>();
 		listPens.setAlignmentX(Component.LEFT_ALIGNMENT);
 		listPens.setPreferredSize(new Dimension(150, 0));
 		panelPens.add(listPens);
@@ -348,7 +348,7 @@ public class View extends JFrame {
 	 * *********** Metodi privati *************
 	 */
 	
-	private static void addPopup(final JList list, final JPopupMenu popup) {
+	private static void addPopup(final JList<ModelListPens> list, final JPopupMenu popup) {
 		list.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if (e.isPopupTrigger()) {
@@ -491,7 +491,7 @@ public class View extends JFrame {
 		return 0;
 	}
 
-	public void setModelListPens(ListModel model) {
+	public void setModelListPens(ListModel<ModelListPens> model) {
 		listPens.setModel(model);
 	}
 	
@@ -593,7 +593,7 @@ public class View extends JFrame {
 	 */
 
 	private class ListPensCellRenderer extends JPanel implements
-			ListCellRenderer {
+			ListCellRenderer<Object> {
 
 		private static final long serialVersionUID = 1L;
 		
@@ -619,6 +619,7 @@ public class View extends JFrame {
 			
 		}
 
+		@SuppressWarnings("rawtypes")
 		@Override
 		public Component getListCellRendererComponent(JList jlist,
 				Object object, int index, boolean isSelected,
