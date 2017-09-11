@@ -2,6 +2,6 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment>Parametri generali Arduino trend</comment>
-<entry key="serial.com_port">/dev/tty.usbserial-A900cdA5</entry>
+<entry key="serial.com_port">COM26</entry>
 <entry key="serial.baud_rate">57600</entry>
 </properties>

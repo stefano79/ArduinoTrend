@@ -45,6 +45,11 @@ public class Project implements Serializable {
 								.getUnits(), pens[i].getModel().getColor(),
 						pens[i].getModel().getMin(), pens[i].getModel()
 								.getMax());
+				penModels[i].setScale(pens[i].getModel().isScale());
+				penModels[i].setScaleInMax(pens[i].getModel().getScaleInMax());
+				penModels[i].setScaleInMin(pens[i].getModel().getScaleInMin());
+				penModels[i].setScaleOutMax(pens[i].getModel().getScaleOutMax());
+				penModels[i].setScaleOutMin(pens[i].getModel().getScaleOutMin());
 			}
 
 		}

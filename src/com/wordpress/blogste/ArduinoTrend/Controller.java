@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import jssc.SerialPortException;
 
@@ -234,8 +235,9 @@ public class Controller implements Observer {
 
 	private void openProject() {
 		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.addChoosableFileFilter(new GenericFileFilter(".atp",
-				"Arduino Trend Progetto"));
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Arduino Trend Progetto", "atp");
+		fileChooser.addChoosableFileFilter(filter);
+		fileChooser.setFileFilter(filter);
 		int n = fileChooser.showOpenDialog(view);
 
 		if (n == JFileChooser.APPROVE_OPTION) {
@@ -261,20 +263,21 @@ public class Controller implements Observer {
 	private void saveProject() {
 		if (file == null) {
 			JFileChooser fileChooser = new JFileChooser();
-			fileChooser.addChoosableFileFilter(new GenericFileFilter(".atp",
-					"Arduino Trend Progetto"));
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("Arduino Trend Progetto", "atp");
+			fileChooser.addChoosableFileFilter(filter);
+			fileChooser.setFileFilter(filter);
 			int n = fileChooser.showSaveDialog(view);
 
 			if (n == JFileChooser.APPROVE_OPTION) {
 				file = fileChooser.getSelectedFile();
 				String nameFile = file.getName();
 				FileFilter currentFilter = fileChooser.getFileFilter();
-				if (currentFilter instanceof GenericFileFilter) {
-					String ext = ((GenericFileFilter) currentFilter)
-							.getExtension();
-					if (file.getName().endsWith(ext) == false) {
+				if (currentFilter instanceof FileNameExtensionFilter) {
+					String[] ext = ((FileNameExtensionFilter) currentFilter)
+							.getExtensions();
+					if (file.getName().endsWith(ext[0]) == false) {
 						try {
-							file = new File(file.getCanonicalPath() + ext);
+							file = new File(file.getCanonicalPath() + "." + ext[0]);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -320,8 +323,9 @@ public class Controller implements Observer {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setApproveButtonText("Importa");
 		fileChooser.setDialogTitle("Importa progetto e  dati");
-		fileChooser.addChoosableFileFilter(new GenericFileFilter(".atd",
-				"Arduino Trend Data"));
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Arduino Trend Data", "atd");
+		fileChooser.addChoosableFileFilter(filter);
+		fileChooser.setFileFilter(filter);
 		int n = fileChooser.showOpenDialog(view);
 
 		if (n == JFileChooser.APPROVE_OPTION) {
@@ -348,22 +352,23 @@ public class Controller implements Observer {
 	private void exportProjectAndData() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setApproveButtonText("Esporta");
-		fileChooser.setDialogTitle("Esporta progetto e dati");
-		fileChooser.addChoosableFileFilter(new GenericFileFilter(".csv",
-				"File generico csv"));
-		fileChooser.addChoosableFileFilter(new GenericFileFilter(".atd",
-				"Arduino Trend Data"));
+		fileChooser.setDialogTitle("Esporta progetto e dati");		
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Arduino Trend Data", "atd");
+		fileChooser.addChoosableFileFilter(filter);
+		fileChooser.setFileFilter(filter);
+		//filter = new FileNameExtensionFilter("File generico csv", "csv");
+		//fileChooser.addChoosableFileFilter(filter);
 
 		int n = fileChooser.showSaveDialog(view);
 
 		if (n == JFileChooser.APPROVE_OPTION) {
 			File file = fileChooser.getSelectedFile();
 			FileFilter currentFilter = fileChooser.getFileFilter();
-			if (currentFilter instanceof GenericFileFilter) {
-				String ext = ((GenericFileFilter) currentFilter).getExtension();
-				if (file.getName().endsWith(ext) == false) {
+			if (currentFilter instanceof FileNameExtensionFilter) {
+				String[] ext = ((FileNameExtensionFilter) currentFilter).getExtensions();
+				if (file.getName().endsWith(ext[0]) == false) {
 					try {
-						file = new File(file.getCanonicalPath() + ext);
+						file = new File(file.getCanonicalPath() + "." + ext[0]);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

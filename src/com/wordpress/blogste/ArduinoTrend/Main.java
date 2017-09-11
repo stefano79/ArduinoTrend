@@ -26,6 +26,7 @@ public class Main {
 		View view = new View();
 		Controller controller = new Controller(view);
 		view.pack();
+		view.setLocationRelativeTo(null);
 		view.setVisible(true);
 		
 	}
